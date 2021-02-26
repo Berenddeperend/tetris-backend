@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "lib": [
+      "es2019",
+      "dom"
+    ],
+    "outDir": "./build",
+    "downlevelIteration": true,
+    "esModuleInterop": true,
+    "typeRoots": ["./node_modules/@types"],
+    "rootDir": "./",
+  }
+}

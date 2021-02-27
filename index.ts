@@ -6,7 +6,6 @@ var bodyParser = require('body-parser')
 
 
 const { Pool } = require('pg')
-// rest of the code remains same
 const app = express();
 const pool = new Pool()
 const PORT = 8000;
@@ -17,7 +16,7 @@ app.use(bodyParser.json());
 console.log("=======================================")
 
 app.get('/scores', (req, res) => {
-  const scores = pool.query(`SELECT * FROM score`).then(scores => {
+  const scores = pool.query(`SELECT * FROM scores`).then(scores => {
     res.json(scores)
   });
 });
@@ -27,9 +26,9 @@ app.post('/score', (req, res) => {
 
   const {name, score, timestamp} = req.body;
 
-  const insertText = 'INSERT INTO score(name, score, timestamp) VALUES ($1, $2, $3)'
+  const insertText = 'INSERT INTO scores(name, score, timestamp) VALUES ($1, $2, $3)'
   pool.query(insertText, [name, score, timestamp]).then(scores => {
-    return pool.query(`SELECT * FROM score`);
+    return pool.query(`SELECT * FROM scores`);
   }).then(scores => {
     res.json(scores);
   });

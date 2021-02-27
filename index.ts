@@ -24,10 +24,10 @@ app.get('/scores', (req, res) => {
 app.post('/score', (req, res) => {
   console.log(req.body)
 
-  const {name, score, timestamp} = req.body;
+  const {name, score, date} = req.body;
 
   const insertText = 'INSERT INTO scores(name, score, timestamp) VALUES ($1, $2, $3)'
-  pool.query(insertText, [name, score, timestamp]).then(scores => {
+  pool.query(insertText, [name, score, date]).then(scores => {
     return pool.query(`SELECT * FROM scores`);
   }).then(scores => {
     res.json(scores);

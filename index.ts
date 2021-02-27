@@ -15,6 +15,10 @@ app.use(bodyParser.json());
 
 console.log("=======================================")
 
+app.get('/', (req, res) => {
+  res.send('hello world.')
+})
+
 app.get('/scores', (req, res) => {
   const scores = pool.query(`SELECT * FROM scores`).then(scores => {
     res.json(scores)

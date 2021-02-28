@@ -10,5 +10,5 @@ sudo -u postgres psql tetris -c 'CREATE TABLE IF NOT EXISTS scores (
   score int NOT NULL,
   timestamp TIMESTAMP NOT NULL,
   v VARCHAR(20) NOT NULL,
-  mode VARCHAR(20) NOT NULL,
+  mode VARCHAR(20) NOT NULL
 );'

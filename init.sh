@@ -4,9 +4,7 @@
 
 # todo: go to 'tetris' namespace
 
-sudo su - postgres
-
-psql tetris -c 'CREATE TABLE IF NOT EXISTS scores (
+sudo -u postgres psql tetris -c 'CREATE TABLE IF NOT EXISTS scores (
   id BIGSERIAL NOT NULL PRIMARY KEY,
   name VARCHAR(6) NOT NULL,
   score int NOT NULL,

@@ -10,7 +10,7 @@ const app = express();
 const pool = new Pool()
 const PORT = 8000;
 
-app.use(cors());
+// app.use(cors());
 app.use(bodyParser.json());
 
 console.log("=======================================")

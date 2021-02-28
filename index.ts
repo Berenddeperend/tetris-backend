@@ -31,12 +31,10 @@ app.post("/score", (req, res) => {
     "INSERT INTO scores(name, score, timestamp, v, mode) VALUES ($1, $2, $3, $4, $5) RETURNING *";
   pool
     .query(insertText, [name, score, timestamp, v, mode])
-    .then((scores) => {
-      return pool.query(`SELECT * FROM scores`);
+    .then((submittedScore) => {
+      console.log('submittedScore: ', submittedScore);
+      res.json(submittedScore)
     })
-    .then((scores) => {
-      res.json(scores);
-    });
 });
 
 // INSERT INTO score (name, score, timestamp, v, mode) VALUES ('brnd', 1, '2016-06-22 19:10:25-07', '1.0', 'singlePlayer');

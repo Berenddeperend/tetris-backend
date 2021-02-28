@@ -32,8 +32,7 @@ app.post("/score", (req, res) => {
   pool
     .query(insertText, [name, score, timestamp, v, mode])
     .then((submittedScore) => {
-      console.log('submittedScore: ', submittedScore);
-      res.json(submittedScore)
+      res.json(submittedScore.rows[0])
     })
 });
 

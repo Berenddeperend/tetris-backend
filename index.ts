@@ -10,7 +10,12 @@ const app = express();
 const pool = new Pool()
 const PORT = 8000;
 
-// app.use(cors());
+var whitelist = ['http://example1.com', 'http://example2.com']
+
+
+app.use(cors());
+app.options('*', cors()) // include before other routes
+
 app.use(bodyParser.json());
 
 console.log("=======================================")

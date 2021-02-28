@@ -1,0 +1,3 @@
+start: `screen`
+detach: ctrl-a
+re-attach: `screen -r`

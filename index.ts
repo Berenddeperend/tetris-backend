@@ -16,7 +16,8 @@ app.use(bodyParser.json());
 console.log("=======================================")
 
 app.get('/', (req, res) => {
-  res.sendFile('./index.html')
+  // res.sendFile('./index.html')
+  res.send('hello world')
 })
 
 app.get('/scores', (req, res) => {

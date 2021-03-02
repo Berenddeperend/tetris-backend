@@ -2,7 +2,7 @@ const dotenv = require("dotenv").config();
 import express from "express";
 const cors = require("cors");
 const bodyParser = require("body-parser");
-
+const path = require('path')
 const { Pool } = require("pg");
 const app = express();
 const pool = new Pool();
@@ -15,7 +15,9 @@ console.log("=======================================");
 
 app.get("/", (req, res) => {
   // res.sendFile('./index.html')
-  res.send("hello world");
+  res.sendFile(path.join(__dirname, './../tetris/dist', 'index.html'));
+
+  // res.send("hello world");
 });
 
 app.get("/scores", (req, res) => {

@@ -42,7 +42,6 @@ app.get("/", rateLimit({ windowMs: 200, max: 1}), (req, res) => {
 });
 
 app.get("/scores", rateLimit({ windowMs: 200, max: 1}), (req, res) => {
-  console.log(req)
   pool.query(`SELECT * FROM scores`).then((scores) => {
     const output = [
       ...scores.rows.sort((a, b) => {

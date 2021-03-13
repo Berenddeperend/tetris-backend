@@ -4,7 +4,7 @@ const fs = require('fs');
 import express from "express";
 const cors = require("cors");
 const bodyParser = require("body-parser");
-const path = require("path");
+const rateLimit = require("express-rate-limit");
 const { Pool } = require("pg");
 const app = express();
 const pool = new Pool();
@@ -12,6 +12,11 @@ const PORT = 8000; //8000
 
 const http = require('http');
 const https = require('https');
+
+
+//  apply to all requests
+app.use(limiter);
+
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -37,11 +42,12 @@ app.listen(PORT, () => {
 });
 
 
-app.get("/", (req, res) => {
+app.get("/", rateLimit({ windowMs: 200, max: 1}, (req, res) => {
   res.send("hello world");
 });
 
-app.get("/scores", (req, res) => {
+app.get("/scores", rateLimit({ windowMs: 200, max: 1}, (req, res) => {
+  console.log(req)
   pool.query(`SELECT * FROM scores`).then((scores) => {
     const output = [
       ...scores.rows.sort((a, b) => {
@@ -53,7 +59,7 @@ app.get("/scores", (req, res) => {
   });
 });
 
-app.post("/score", (req, res) => {
+app.post("/score", rateLimit({ windowMs: 5000, max: 1}, (req, res) => {
   console.log(req.body);
 
   const timestamp = new Date().toISOString();

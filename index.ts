@@ -42,11 +42,11 @@ app.listen(PORT, () => {
 });
 
 
-app.get("/", rateLimit({ windowMs: 200, max: 1}, (req, res) => {
+app.get("/", rateLimit({ windowMs: 200, max: 1}), (req, res) => {
   res.send("hello world");
 });
 
-app.get("/scores", rateLimit({ windowMs: 200, max: 1}, (req, res) => {
+app.get("/scores", rateLimit({ windowMs: 200, max: 1}), (req, res) => {
   console.log(req)
   pool.query(`SELECT * FROM scores`).then((scores) => {
     const output = [
@@ -59,7 +59,7 @@ app.get("/scores", rateLimit({ windowMs: 200, max: 1}, (req, res) => {
   });
 });
 
-app.post("/score", rateLimit({ windowMs: 5000, max: 1}, (req, res) => {
+app.post("/score", rateLimit({ windowMs: 5000, max: 1}), (req, res) => {
   console.log(req.body);
 
   const timestamp = new Date().toISOString();

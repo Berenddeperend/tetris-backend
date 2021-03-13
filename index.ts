@@ -56,7 +56,7 @@ app.get("/scores", (req, res) => {
 app.post("/score", (req, res) => {
   console.log(req.body);
 
-  const timestamp = Date.now();
+  const timestamp = new Date().toISOString();
 
   const { name, score, v, mode } = req.body;
   const insertText =

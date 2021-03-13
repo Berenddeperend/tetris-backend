@@ -63,7 +63,7 @@ app.post("/score", rateLimit({ windowMs: 5000, max: 1}), (req, res) => {
   const insertText =
     "INSERT INTO scores(name, score, timestamp, v, mode) VALUES ($1, $2, $3, $4, $5) RETURNING *";
   pool
-    .query(insertText, [name, score, timestamp, v, mode])
+    .query(insertText, [name.substring(0, 3), score, timestamp, v, mode])
     .then((submittedScore) => {
       res.json(submittedScore.rows[0]);
     });

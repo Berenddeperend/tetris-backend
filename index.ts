@@ -15,15 +15,10 @@ const https = require('https');
 
 app.use(cors());
 app.use(bodyParser.json());
-app.options("*", cors()); // include before other routes
-
-
 
 const privateKey = fs.readFileSync('/home/pi/letsencrypt/live/berendswennenhuis.nl/privkey.pem', 'utf8');
 const certificate = fs.readFileSync('/home/pi/letsencrypt/live/berendswennenhuis.nl/cert.pem', 'utf8');
 const ca = fs.readFileSync('/home/pi/letsencrypt/live/berendswennenhuis.nl/chain.pem', 'utf8');
-
-
 
 const credentials = {
 	key: privateKey,
@@ -43,9 +38,6 @@ app.listen(PORT, () => {
 
 
 app.get("/", (req, res) => {
-  // res.sendFile('./index.html')
-  // res.sendFile(path.join(__dirname, "./../tetris/dist", "index.html"));
-
   res.send("hello world");
 });
 
@@ -64,7 +56,9 @@ app.get("/scores", (req, res) => {
 app.post("/score", (req, res) => {
   console.log(req.body);
 
-  const { name, score, timestamp, v, mode } = req.body;
+  const timestamp = Date.now();
+
+  const { name, score, v, mode } = req.body;
   const insertText =
     "INSERT INTO scores(name, score, timestamp, v, mode) VALUES ($1, $2, $3, $4, $5) RETURNING *";
   pool

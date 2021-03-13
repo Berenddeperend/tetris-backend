@@ -13,11 +13,6 @@ const PORT = 8000; //8000
 const http = require('http');
 const https = require('https');
 
-
-//  apply to all requests
-app.use(limiter);
-
-
 app.use(cors());
 app.use(bodyParser.json());
 

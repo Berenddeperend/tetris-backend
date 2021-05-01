@@ -16,5 +16,5 @@ RUN npm install
 COPY . .
 
 EXPOSE 8000
-# CMD [ "node", "index.ts" ]
-CMD ["npm", "run", "serve"]
+
+# CMD ["npm", "run", "serve"]

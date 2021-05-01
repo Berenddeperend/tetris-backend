@@ -10,32 +10,12 @@ const app = express();
 const pool = new Pool();
 const PORT = 8000; //8000
 
-const http = require('http');
-const https = require('https');
-
 app.use(cors());
 app.use(bodyParser.json());
-
-const privateKey = fs.readFileSync('/home/pi/letsencrypt/live/berendswennenhuis.nl/privkey.pem', 'utf8');
-const certificate = fs.readFileSync('/home/pi/letsencrypt/live/berendswennenhuis.nl/cert.pem', 'utf8');
-const ca = fs.readFileSync('/home/pi/letsencrypt/live/berendswennenhuis.nl/chain.pem', 'utf8');
-
-const credentials = {
-	key: privateKey,
-	cert: certificate,
-	ca: ca
-};
-
-const httpsServer = https.createServer(credentials, app);
-
-httpsServer.listen(443, () => {
-	console.log('HTTPS Server running on port 443');
-});
 
 app.listen(PORT, () => {
   console.log(`⚡️[server]: Server is running at https://localhost:${PORT}`);
 });
-
 
 app.get("/", rateLimit({ windowMs: 200, max: 1}), (req, res) => {
   res.send("hello world");

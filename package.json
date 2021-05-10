@@ -5,6 +5,8 @@
   "main": "index.ts",
   "scripts": {
     "serve": "npx ts-node index.ts",
+    "docker:build": "docker build -t berenddeperend/tetris-backend .",
+    "docker:push": "docker push berenddeperend/tetris-backend",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",

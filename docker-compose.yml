@@ -1,4 +1,4 @@
-version: "3"
+version: "3.7"
 
 services:
   tetris-backend:
@@ -18,7 +18,7 @@ services:
       && chmod +x ./init.sh
       && ./wait-for-it.sh postgres:5432 -- npm run serve"
   postgres:
-    image: postgres:alpine
+    image: postgres:9.4.23-alpine
     restart: always
     container_name: "postgres-tetris"
     ports:
@@ -32,5 +32,4 @@ services:
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
 
 volumes:
-  tetris-backend:
   postgres:

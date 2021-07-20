@@ -7,7 +7,9 @@ const bodyParser = require("body-parser");
 const rateLimit = require("express-rate-limit");
 const { Pool } = require("pg");
 const app = express();
-const pool = new Pool();
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL
+});
 const PORT = 8000; //8000
 
 app.use(cors());
@@ -17,11 +19,11 @@ app.listen(PORT, () => {
   console.log(`⚡️[server]: Server is running at https://localhost:${PORT}`);
 });
 
-app.get("/tetris/", rateLimit({ windowMs: 200, max: 1}), (req, res) => {
-  res.send("This will serve Tetris later.");
-});
+// app.get("/tetris/", rateLimit({ windowMs: 200, max: 1}), (req, res) => {
+//   res.send("This will serve Tetris later.");
+// });
 
-app.get("/tetris/api/scores", rateLimit({ windowMs: 200, max: 1}), (req, res) => {
+app.get("/api/scores", rateLimit({ windowMs: 200, max: 1}), (req, res) => {
   pool.query(`SELECT * FROM scores`).then((scores) => {
     const output = [
       ...scores.rows.sort((a, b) => {
@@ -33,7 +35,7 @@ app.get("/tetris/api/scores", rateLimit({ windowMs: 200, max: 1}), (req, res) =>
   });
 });
 
-app.post("/tetris/api/score", rateLimit({ windowMs: 5000, max: 1}), (req, res) => {
+app.post("/api/score", rateLimit({ windowMs: 5000, max: 1}), (req, res) => {
   console.log(req.body);
 
   const timestamp = new Date().toISOString();

@@ -1,17 +1,13 @@
-#!/bin/bash
+-- CREATE USER myUser;
 
-# first run 'chmod +x init.sh'
+-- CREATE DATABASE myApp_dev;
+-- GRANT ALL PRIVILEGES ON DATABASE myApp_dev TO myUser;
 
-# todo: go to 'tetris' namespace
-
-sudo -u postgres psql tetris -c 'CREATE TABLE IF NOT EXISTS scores (
+CREATE TABLE IF NOT EXISTS scores (
   id BIGSERIAL NOT NULL PRIMARY KEY,
   name VARCHAR(6) NOT NULL,
   score int NOT NULL,
   timestamp TIMESTAMP NOT NULL,
   v VARCHAR(20) NOT NULL,
   mode VARCHAR(20) NOT NULL
-);'
-
-
-
+);

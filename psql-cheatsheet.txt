@@ -1,0 +1,12 @@
+docker exec -it postgres-tetris sh
+
+psql -d tetris -U berend 
+
+list databases:
+\l
+
+list tables in current db
+\dt
+
+list schemas 
+\dn

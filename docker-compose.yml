@@ -1,0 +1,36 @@
+version: "3"
+
+services:
+  tetris-backend:
+    build: .
+    image: tetris-backend
+    container_name: "tetris-backend"
+    environment:
+      DATABASE_URL: postgres://berend:${POSTGRES_PASSWORD}@postgres:5432/tetris
+    depends_on:
+      - "postgres"
+    ports:
+      - "8000:8000"
+    volumes:
+      - postgres:/var/lib/postgresql/data
+    command: >
+      bash -c "chmod +x ./wait-for-it.sh
+      && chmod +x ./init.sh
+      && ./wait-for-it.sh postgres:5432 -- npm run serve"
+  postgres:
+    image: postgres:alpine
+    restart: always
+    container_name: "postgres-tetris"
+    ports:
+      - "5432:5432"
+    environment:
+        POSTGRES_USER: berend
+        POSTGRES_PASSWORD: "${POSTGRES_PASSWORD}"
+        POSTGRES_DB: tetris
+    volumes:
+      - postgres:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+
+volumes:
+  tetris-backend:
+  postgres:

@@ -17,10 +17,15 @@ services:
       bash -c "chmod +x ./wait-for-it.sh
       && chmod +x ./init.sh
       && ./wait-for-it.sh postgres:5432 -- npm run serve"
+    networks:
+      - 'caddy'
+      - 'tetris-db'
   postgres:
     image: postgres:9.4.23-alpine
     restart: always
     container_name: "postgres-tetris"
+    networks:
+      - 'tetris-db'
     ports:
       - "5432:5432"
     environment:
@@ -33,3 +38,10 @@ services:
 
 volumes:
   postgres:
+
+networks: 
+  caddy:
+    name: caddy
+  tetris-db:
+    name: tetris-db
+    

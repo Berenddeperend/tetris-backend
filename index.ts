@@ -19,9 +19,10 @@ app.listen(PORT, () => {
   console.log(`⚡️[server]: Server is running at https://localhost:${PORT}`);
 });
 
-// app.get("/tetris/", rateLimit({ windowMs: 200, max: 1}), (req, res) => {
-//   res.send("This will serve Tetris later.");
-// });
+app.get("/", rateLimit({ windowMs: 200, max: 1}), (req, res) => {
+  res.send("working.");
+});
+
 
 app.get("/api/scores", rateLimit({ windowMs: 200, max: 1}), (req, res) => {
   pool.query(`SELECT * FROM scores`).then((scores) => {

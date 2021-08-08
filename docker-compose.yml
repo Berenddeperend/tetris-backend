@@ -5,6 +5,7 @@ services:
     build: .
     image: tetris-backend
     container_name: "tetris-backend"
+    restart: always
     environment:
       DATABASE_URL: postgres://berend:${POSTGRES_PASSWORD}@postgres:5432/tetris
     depends_on:
